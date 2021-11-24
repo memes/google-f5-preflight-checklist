@@ -1,3 +1,5 @@
-# repo-template
+# F5 Preflight Checklist for Google Cloud
 
-Stuff I always add to my repos.
+<!-- TODO: @memes - documentation! -->
+Utility to check that an environment is suitable for deploying F5 VM products in
+Google Cloud.

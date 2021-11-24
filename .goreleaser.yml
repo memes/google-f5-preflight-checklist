@@ -1,10 +1,7 @@
-# use goreleaser for builds and containers
-#
-# TODO: @memes
-#  - search for APP and update as needed
-#  - modify labels, as needed
+# use goreleaser for builds and containers; only x86_64 builds for Linux and
+# Windows are needed for GCP.
 ---
-project_name: APP
+project_name: google-f5-preflight-checklist
 before:
   hooks:
     - go mod tidy
@@ -15,21 +12,12 @@ builds:
       - -trimpath
     ldflags:
       - -s -w -X main.version={{ .Version }}-{{ .Commit }}
+    # TODO: @memes - expand this list as needed
     goos:
-      - freebsd
       - linux
       - windows
-      - darwin
     goarch:
       - amd64
-      - '386'
-      - arm
-      - arm64
-    ignore:
-      - goos: darwin
-        goarch: '386'
-    # TODO: @memes - modify to match location of main package if not in root
-    main: ./cmd/APP/
     mod_timestamp: '{{ .CommitTimestamp }}'
 archives:
   - format: zip
@@ -70,7 +58,7 @@ dockers:
       - "--label=maintainer=Matthew Emes <memes@matthewemes.com>"
       - "--label=org.opencontainers.image.title={{ .ProjectName }}"
       - "--label=org.opencontainers.image.authors=memes@matthewemes.com"
-      - "--label=org.opencontainers.image.description={{ .ProjectName }} description"
+      - "--label=org.opencontainers.image.description=Perform a preflight check before deploying F5 products in GCP"
       - "--label=org.opencontainers.image.licenses=MIT"
       - "--label=org.opencontainers.image.created={{ .Date }}"
       - "--label=org.opencontainers.image.source={{ .GitURL }}/tree/{{ .FullCommit }}"
@@ -79,7 +67,7 @@ dockers:
       - "--label=org.opencontainers.image.revision={{ .FullCommit }}"
       - "--label=org.opencontainers.image.url={{ .GitURL }}"
       - "--label=org.label-schema.schema-version=1.0"
-      - "--label=org.label-schema.description={{ .ProjectName }} description"
+      - "--label=org.label-schema.description=Perform a preflight check before deploying F5 products in GCP"
       - "--label=org.label-schema.name={{ .ProjectName }}"
       - "--label=org.label-schema.vcs-url={{ .GitURL }}/tree/{{ .FullCommit }}"
       - "--label=org.label-schema.usage={{ .GitURL }}/tree/{{ .FullCommit }}/README.md"

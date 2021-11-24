@@ -1,12 +1,12 @@
 ---
 name: Feature request
-about: Suggest an idea for these modules
+about: Suggest an idea for this tool
 title: ''
 labels: 'enhancement'
 assignees: 'memes'
 ---
 
-Hello and thank you for using this repo. Please complete this form to share your
+Hello and thank you for using this tool. Please complete this form to share your
 ideas. If you already have a proposed solution, open a pull request for review
 and link it to this issue where prompted.
 
